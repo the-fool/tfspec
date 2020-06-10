@@ -12,7 +12,6 @@ with open("src/tfspec/__init__.py", encoding="utf8") as f:
 setup(
     name="TerraformSpec",
     version=version,
-    install_requires=[
-    ],
+    install_requires=[],
     extras_require={"dotenv": ["python-dotenv"]},
 )
