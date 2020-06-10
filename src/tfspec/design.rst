@@ -68,10 +68,10 @@ This spec will forbid the creation of :code:`google_compute_firewall` resources
 
 .. code-block:: python
 
-    from tfspec import Spec, FORBID
+    from tfspec import Spec, Forbid
 
     spec = Spec({
-        'google_compute_firewall': FORBID
+        'google_compute_firewall': Forbid
     })
 
 Optional keys with a rule
@@ -81,30 +81,30 @@ To apply a rule to a key when it is present, but allow for it to be left out, ma
 
 .. code-block:: python
 
-    from tfspec import Spec, OPT
+    from tfspec import Spec, Opt
 
     spec = Spec({
         'google_compute_firewall': {
-            'enable_logging': OPT(False)
+            'enable_logging': Opt(False)
         }
     })
 
 This spec will allow for :code:`google_compute_firewall` to ignore the :code:`enable_logging` key.  But if it specifies the key, it *must* be set to the value :code:`False`.
 
-_Note: Without using `OPT`, all keys are assumed to be *required*. 
+_Note: Without using :code:`Opt`, all keys are assumed to be *required*. 
 
 Requiring a key with no rule
 ----------------------------
 
-To require a key, but without specifying a rule, use the :code:`ANYTHING` validator.
+To require a key, but without specifying a rule, use the :code:`Anything` validator.
 
 .. code-block:: python
 
-    from tfspec import Spec, ANYTHING
+    from tfspec import Spec, Anything
 
     spec = Spec({
         'google_compute_firewall': {
-            'description': ANYTHING
+            'description': Anything
         }
     })
 
