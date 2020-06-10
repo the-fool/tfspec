@@ -1,4 +1,4 @@
 class Spec:
     @staticmethod
-    def test():
+    def meaning_of_everything():
         return 42
