@@ -14,15 +14,15 @@ Three Key Pillars
 
 For every parameter of a Terraform resource there are three possible attributes:
 
-* Is the key _required_
-* Is the key _forbidden_
-* Is the value _valid_
+* Is the key **required**
+* Is the key **forbidden**
+* Is the value **valid**
 
 These pillars can be collapsed down to one methed: value validation.
 
-* Is the key _required_ == Is the value non-null for key
-* Is the key _forbidden_ == Is the value null for the key
-* Is the value _valid_ == Does the value pass the validator
+* Is the key **required** == Is the value non-null for key
+* Is the key **forbidden** == Is the value null for the key
+* Is the value **valid** == Does the value pass the validator
 
 Example spec
 ------------
@@ -39,7 +39,7 @@ Example spec
     with open('tfplan.json', 'r') as plan:
         spec.validate(plan)
 
-This code will ensure that _all_ `google_compute_firewall` resources have the property `enable_logging = true`.
+This code will ensure that *all* `google_compute_firewall` resources have the property `enable_logging = true`.
 
 
 Forbidding a resource
@@ -89,6 +89,6 @@ To require a key, but without specifying a rule, use the `ANYTHING` validator.
         }
     })
 
-In this case, `description` must be included, but that is all we specify.  
+In this case, :code:`description` must be included, but that is all we specify.  
 
 Usually, any validator is better than `ANYTHING` -- but it is there if you need it.  A better validation would be ensuring that `description` is a string of a certain length.
