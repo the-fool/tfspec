@@ -1,4 +1,5 @@
-# Terraform Spec
+Terraform Spec
+==============
 
 Rule your resources.
 
