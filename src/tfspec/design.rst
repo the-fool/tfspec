@@ -91,7 +91,7 @@ To apply a rule to a key when it is present, but allow for it to be left out, ma
 
 This spec will allow for :code:`google_compute_firewall` to ignore the :code:`enable_logging` key.  But if it specifies the key, it *must* be set to the value :code:`False`.
 
-_Note: Without using :code:`Opt`, all keys are assumed to be *required*. 
+Note: Without using :code:`Opt`, all keys are assumed to be *required*.
 
 Requiring a key with no rule
 ----------------------------
@@ -108,14 +108,35 @@ To require a key, but without specifying a rule, use the :code:`Anything` valida
         }
     })
 
-In this case, :code:`description` must be included, but that is all we specify.  
+In this case, :code:`description` must be included, but that is all we specify.
 
 Usually, any validator is better than :code:`ANYTHING` -- but it is there if you need it.  A better validation would be ensuring that :code:`description` is a string of a certain length.
+
+Requiring more than one rule
+---------------------------
+
+If a value must pass several validators, use :code:`All` to collect all the validators.
+
+.. code-block:: python
+
+    from tfspec import Spec, All
+
+    spec = Spec({
+        'google_kms_key_ring': {
+            'name': All(
+                lambda x: len(x) < 30,
+                lambda x: 'foo' in x
+            )
+        }
+    })
+
+This rule specifies that a key ring name must be both less than 30 characters long and that the string 'foo' is found in it.
+
 
 Requiring one of many rules
 ---------------------------
 
-If there are many possible validators values, use :code:`ANY` to specify that *at least one* rule must pass.
+If there are many possible validators, and any of them would suffice, use :code:`Any` to specify that *at least one* rule must pass.
 
 .. code-block:: python
 
