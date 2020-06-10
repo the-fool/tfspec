@@ -15,4 +15,3 @@ repos:
     hooks:
       - id: check-byte-order-marker
       - id: trailing-whitespace
-      - id: end-of-file-fixer
