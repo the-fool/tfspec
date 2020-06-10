@@ -74,6 +74,22 @@ This spec will forbid the creation of :code:`google_compute_firewall` resources
         'google_compute_firewall': Forbid
     })
 
+Requiring one of many rules
+---------------------------
+
+If there are many possible validators, and any of them would suffice, use :code:`Any` to specify that *at least one* rule must pass.
+
+.. code-block:: python
+
+    from tfspec import Spec, Any
+
+    spec = Spec({
+        'google_kms_key_ring': {
+            'location': Any('us-west1', 'us-east1)
+        }
+    })
+
+
 Optional keys with a rule
 -------------------------
 
@@ -92,6 +108,10 @@ To apply a rule to a key when it is present, but allow for it to be left out, ma
 This spec will allow for :code:`google_compute_firewall` to ignore the :code:`enable_logging` key.  But if it specifies the key, it *must* be set to the value :code:`False`.
 
 Note: Without using :code:`Opt`, all keys are assumed to be *required*.
+
+Note something else: :code:`Opt(validator)` is just a convenience for :code:`Any(None, validator)`
+
+
 
 Requiring a key with no rule
 ----------------------------
@@ -132,21 +152,6 @@ If a value must pass several validators, use :code:`All` to collect all the vali
 
 This rule specifies that a key ring name must be both less than 30 characters long and that the string 'foo' is found in it.
 
-
-Requiring one of many rules
----------------------------
-
-If there are many possible validators, and any of them would suffice, use :code:`Any` to specify that *at least one* rule must pass.
-
-.. code-block:: python
-
-    from tfspec import Spec, Any
-
-    spec = Spec({
-        'google_kms_key_ring': {
-            'location': Any('us-west1', 'us-east1)
-        }
-    })
 
 Validating Lists
 ----------------
