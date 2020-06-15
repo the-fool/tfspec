@@ -85,10 +85,24 @@ If there are many possible validators, and any of them would suffice, use :code:
 
     spec = Spec({
         'google_kms_key_ring': {
-            'location': Any('us-west1', 'us-east1)
+            'location': Any('us-west1', 'us-east1')
         }
     })
 
+Forbidding one of many rules
+----------------------------
+
+If there are many possible validators, but only subset of invalid values, use :code:`Deny` to specify that the value must not equal *any listed rule* in order to pass.
+
+.. code-block:: python
+
+    from tfspec import Spec, Deny
+
+    spec = Spec({
+        'google_kms_key_ring': {
+            'location': Deny('asia-east1', 'asia-east2', 'australia-southeast1')
+        }
+    })
 
 Optional keys with a rule
 -------------------------
